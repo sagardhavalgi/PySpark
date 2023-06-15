@@ -59,3 +59,32 @@ Overall, Spark DataFrames provide a powerful and flexible API for working with s
 <h4 align="left">People who want to learn PySpark and AWS on Udemy</h4><a href="https://www.udemy.com/course/pyspark-aws-master-big-data-with-pyspark-and-aws">Click here</a>
 
 <h4 align="left">PySpark Document</h4><a href="https://spark.apache.org/docs/latest/api/python/getting_started/index.html">Click here</a>
+
+<h3 align="left">HOW TO CREATE A DATAFRAME FOR VARIABLE NUMBER OF COLUMNS</h3>
+
+suppose file is like this
+
+Rohit ,24
+Ravi,25,abc@gmail.com
+Rahul,23,123@gmail.com,Delhi
+Rohan
+
+note - there is no header in this file and we are unaware of how many maximum columns are there in file.
+
+=> step1 - read file as text so u can get all data in one column
+
+note - if u read file as CSV it will only take minimum no. of columns .
+
+=> step 2 - Use split and withcolumn to create a list of all items in another column and then drop the column created in step 1.
+
+=> step3 - Now get the maximum no. of columns using max and size.
+
+note - use collect()[0][0] to get the value as int.
+
+=> step4 - Extend the code in step 3 ,using for loop outside that .
+
+note - loop will go till the max. columns
+
+In loop we will use withcolumn to give column name to each column
+
+the rows which does not have any value will have null value
