@@ -88,3 +88,45 @@ note - loop will go till the max. columns
 In loop we will use withcolumn to give column name to each column
 
 the rows which does not have any value will have null value
+
+
+<h3 align="left">Exploring Different Reading and Writing Modes in PySpark</h3>
+
+<h4 align="left">Reading Modes in PySpark:</h4>
+ 
+1. Permissive Mode:
+   - Permissive mode is the default mode when using higher-level APIs in PySpark.
+   - It allows the reading of corrupt records or records with missing fields.
+   - When encountering an incompatible record, PySpark tries to infer the schema and continues processing, resulting in potential data inconsistencies.
+   - This mode is suitable when working with data sources where data quality may vary, and skipping invalid records is not critical.
+ 
+2. Dropmalformed Mode:
+   - Dropmalformed mode drops any entire row containing a null or missing value across all columns.
+   - It ensures that only complete and valid rows are retained for further processing.
+   - This mode is useful when the presence of null values in any row could adversely affect the analysis or computations downstream.
+ 
+3. FailFast Mode:
+   - FailFast mode throws an error immediately upon encountering an incompatible or corrupt record.
+   - It halts the reading process and provides an opportunity to handle or address the error before proceeding.
+   - This mode is beneficial when data integrity is of utmost importance, and any invalid record must be addressed before further analysis.
+
+<h4 align="left">Writing Modes in PySpark:</h4>
+ 
+PySpark also offers various writing modes that determine the behavior when storing data.
+ 
+1. Overwrite Mode:
+   - Overwrite mode replaces existing data in the target location with the new data being written.
+   - It ensures that only the latest data is stored, making it useful for scenarios where the entire dataset needs to be updated.
+ 
+2. Append Mode:
+   - Append mode adds the new data to the existing data in the target location.
+   - It allows incremental updates without affecting the previously stored data.
+   - This mode is suitable when new data needs to be appended to an existing dataset.
+ 
+3. Ignore Mode:
+   - Ignore mode simply ignores the write operation if the target location already contains data.
+   - It prevents any data duplication or overwrite and ensures that the existing data remains intact.
+   - This mode is helpful when writing data periodically and avoiding any unintended modifications.
+ 
+4. Error Ifexist - IN this modee it will through error directly if the folder is already
+  
